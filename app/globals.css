@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================
+   Parbat-NY — base resets + the one shared non-utility:
+   the scroll-reveal transition (toggled by <Reveal>).
+   Design tokens live in tailwind.config.ts.
+   Fonts (--font-serif / --font-sans) are injected by next/font.
+   =========================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0d0d0f;
+  color: #f4f4f5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #e11d3a;
+  color: #fff;
+}
+
+/* scroll reveal — kept as plain CSS so <Reveal> can toggle .is-visible */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    animation: none !important;
+  }
+}
