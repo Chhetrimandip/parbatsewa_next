@@ -7,27 +7,28 @@ import Footer from '@/components/Footer';
 import Reveal from '@/components/Reveal';
 import Image from 'next/image';
 import { getEvents, getFeaturedEvent } from '@/sanity/lib/api';
+import Link from 'next/link';
 
 export const metadata: Metadata = { title: 'Events & Initiatives — Parbat-NY' };
 
 // Sample events used until Sanity is connected (or if a fetch fails).
 const fallbackEvents = [
-  { title: 'Annual Blood Donation Drive', badge: 'HEALTH', theme: 'red' as const,
+  { title: 'Annual Blood Donation Drive', slug: '/events', badge: 'HEALTH', theme: 'red' as const,
     meta: ['Broadway Commons, Long Island', '115+ units · 2024–25'],
     desc: 'Our flagship health initiative — chief guests, dozens of donors, and life-saving units collected each year.' },
-  { title: 'Haritalika Teej & Summer BBQ', badge: 'CULTURE', theme: 'amber' as const,
+  { title: 'Haritalika Teej & Summer BBQ', slug: '/events', badge: 'CULTURE', theme: 'amber' as const,
     meta: ['Sunken Meadow Park', 'Aug 2025 · 250+ guests'],
     desc: "A vibrant celebration of women's traditions with dar khane, music, and food drawing our largest crowd yet." },
-  { title: 'Nepal Day Parade', badge: 'HERITAGE', theme: 'red' as const,
+  { title: 'Nepal Day Parade', slug: '/events', badge: 'HERITAGE', theme: 'red' as const,
     meta: ['Manhattan', '2024 · 2025 · 2026'],
     desc: 'Representing Parbat with a bhajan kirtan team, rally, and folk stage performance year after year.' },
-  { title: 'Deusi Bhailo — Tihar Night', badge: 'CULTURE', theme: 'amber' as const,
+  { title: 'Deusi Bhailo — Tihar Night', slug: '/events', badge: 'CULTURE', theme: 'amber' as const,
     meta: ['New York', 'Oct 2024'],
     desc: 'A Deepawali evening of cultural performances that brought together leaders from across the community.' },
-  { title: 'Humanitarian Relief Fund', badge: 'AID', theme: 'red' as const,
+  { title: 'Humanitarian Relief Fund', slug: '/events', badge: 'AID', theme: 'red' as const,
     meta: ['NY & Nepal', 'Ongoing'],
     desc: 'From the Laxman Malla family fund to young Sangam Chhetri, we mobilize support when families need it most.' },
-  { title: 'Parbat Volleyball — 1st Place', badge: 'SPORTS', theme: 'green' as const,
+  { title: 'Parbat Volleyball — 1st Place', slug: '/events', badge: 'SPORTS', theme: 'green' as const,
     meta: ['Baglung Volleyball Club Cup', 'May 2026'],
     desc: 'Fielding Parbat A & B teams in the inaugural cup, with Parbat A taking home the championship.' },
 ];
@@ -69,8 +70,10 @@ export default async function EventsPage() {
       ? sanityEvents.map((e) => ({
           key: e._id,
           title: e.title,
+          slug: e.slug ?? '/events',
           badge: e.badge,
           theme: (e.theme ?? 'red') as 'red' | 'amber' | 'green',
+          
           meta: [e.location, e.timeframe].filter(Boolean) as string[],
           desc: e.description ?? '',
           imageUrl: e.imageUrl,
@@ -82,6 +85,7 @@ const featuredImageUrl = sanityFeatured?.imageUrl;
 const featured = sanityFeatured
   ? {
       title: sanityFeatured.title,
+      slug: sanityFeatured.slug,
       description: sanityFeatured.description ?? '',
       dateLabel: formatDate(sanityFeatured.date),
       location: sanityFeatured.location,
@@ -103,6 +107,9 @@ const featured = sanityFeatured
         />
 
         {/* FEATURED / UPCOMING */}
+<Link href={`/events/${featured.slug}`}>
+
+
         <section className="px-[6%] pb-[70px] pt-5">
           <Reveal className="relative flex min-h-[300px] items-end overflow-hidden rounded-[14px]">
             {featured.imageUrl ? (
@@ -159,6 +166,7 @@ const featured = sanityFeatured
             </div>
           </Reveal>
         </section>
+        </Link>
 
         {/* HIGHLIGHTS GRID */}
         <section className="px-[6%] pb-10">
@@ -168,15 +176,16 @@ const featured = sanityFeatured
           </Reveal>
           <div className="grid grid-cols-3 gap-6 max-[860px]:grid-cols-2 max-[560px]:grid-cols-1">
             {events.map((e) => (
-              <EventCard
-                key={e.key}
-                title={e.title}
-                badge={e.badge}
-                theme={e.theme}
-                meta={e.meta}
-                desc={e.desc}
-                imageUrl={e.imageUrl}
-              />
+              <Link key={e.key} href={`/events/${e.slug}`}>
+                <EventCard
+                  title={e.title}
+                  badge={e.badge}
+                  theme={e.theme}
+                  meta={e.meta}
+                  desc={e.desc}
+                  imageUrl={e.imageUrl}
+                />
+              </Link>
             ))}
           </div>
         </section>

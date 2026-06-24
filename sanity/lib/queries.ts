@@ -5,12 +5,13 @@ export const eventsQuery = groq`
   *[_type == "event" && featured != true] | order(date desc) {
     _id,
     title,
+    "slug": slug.current,
     badge,
     theme,
     location,
     timeframe,
     description,
-    "imageUrl": image.asset->url
+    "imageUrl": images[0].asset->url
   }
 `;
 
@@ -19,10 +20,28 @@ export const featuredEventQuery = groq`
   *[_type == "event" && featured == true] | order(date desc)[0] {
     _id,
     title,
+    "slug": slug.current,
     location,
     timeframe,
     description,
     date,
     "imageUrl": images[0].asset->url
+  }
+`;
+
+/** Fetch a single event by slug. */
+export const eventBySlugQuery = groq`
+  *[_type == "event" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    badge,
+    theme,
+    location,
+    timeframe,
+    description,
+    date,
+    featured,
+    "images": images[].asset->url
   }
 `;

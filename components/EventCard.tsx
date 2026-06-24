@@ -65,7 +65,10 @@ export default function EventCard({
             <span>{m}</span>
           </div>
         ))}
-        <p className="mt-3 text-[13px] leading-[1.65] text-muted">{desc}</p>
+        {/* MODIFIED: Added line-clamp-5 and line-break classes below */}
+        <p className="mt-3 text-[13px] leading-[1.65] text-muted line-clamp-5 break-words">
+          {desc}
+        </p>
       </div>
     </Reveal>
   );

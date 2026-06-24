@@ -23,11 +23,7 @@ export default function PageHero({ eyebrow, title, accent, lead }: PageHeroProps
             </>
           )}
         </h1>
-        {lead && (
-          <p className="max-w-[620px] animate-float-up text-[17px] leading-[1.7] text-[#c3c4ca] opacity-0 [animation-delay:0.41s]">
-            {lead}
-          </p>
-        )}
+
       </div>
     </section>
   );

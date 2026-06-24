@@ -14,8 +14,9 @@ export default function Header() {
         href="/"
         className="font-serif text-[22px] font-extrabold tracking-[0.5px] text-red-soft no-underline"
       >
+        {/* <Image src="/logo.png" alt="Parbat-NY logo" width={30} height={10} /> */}
         Parbat-NY
-           </Link>
+          </Link>
 
       <nav className="flex items-center gap-[38px] max-[860px]:hidden">
         {navLinks.map((link) => (
