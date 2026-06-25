@@ -77,8 +77,8 @@ export const event = defineType({
       title: 'Images',
       type: 'array',
       of: [{ type: 'image', options: { hotspot: true } }],
-      validation: (rule) => rule.max(3),
-      description: 'Upload up to 3 images for this event.',
+      validation: (rule) => rule.max(10),
+      description: 'Upload up to 10 images for this event.',
     }),
   ],
   preview: {

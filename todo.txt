@@ -1,2 +1,3 @@
 Put web3 api in env file
 link everything to the orgs email
+phone number ,state id photo and citizen ship photo, 

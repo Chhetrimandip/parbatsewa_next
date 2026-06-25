@@ -17,12 +17,14 @@ const requirements = [
   'Commit to supporting our core pillars: Heritage, Humanitarian Aid, and Solidarity.',
   'Agree to the organizational code of conduct and annual membership dues.',
 ];
+
 const formOptions = [
-    'General Inquiry',
-    'Lifetime Membership ($150)',
-    'General Membership ($50)',
-    'Membership Renewal ($20)'
-  ];
+  'General Inquiry',
+  'Lifetime Membership ($150)',
+  'General Membership ($50)',
+  'Membership Renewal ($20)'
+];
+
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -67,75 +69,44 @@ export default function ContactPage() {
           lead="Whether you have a question about our upcoming events, need community support, or want to officially join Parbat Sewa Samaj New York, we are here for you."
         />
 
-
-            
-<section className="mx-auto grid max-w-[1200px] grid-cols-[1fr_1fr] items-start gap-16 px-[6%] pb-[120px] pt-10 max-[980px]:grid-cols-1 max-[980px]:gap-12">
-        
-        {/* LEFT COLUMN: FORM */}
-        <Reveal className="rounded-[10px] border border-white/5 bg-card-2 p-[40px] max-[560px]:p-[24px]">
-          <p className={`${eyebrow} mb-4`}>SEND A MESSAGE</p>
-          <h2 className={`${sectionTitle} mb-6 leading-[1.2]`}>
-            {inquiryType === 'General Inquiry' ? 'General Inquiries' : 'Membership Application'}
-          </h2>
+        <section className="mx-auto grid max-w-[1200px] grid-cols-[1fr_1fr] items-start gap-16 px-[6%] pb-[120px] pt-10 max-[980px]:grid-cols-1 max-[980px]:gap-12">
           
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            {/* Hidden inputs for Web3Forms */}
-            <input type="hidden" name="subject" value={`New Submission: ${inquiryType} - Parbat NY`} />
-            <input type="hidden" name="inquiry_type" value={inquiryType} /> 
-            <input type="checkbox" name="botcheck" className="hidden" />
+          {/* LEFT COLUMN: FORM */}
+          <Reveal className="rounded-[10px] border border-white/5 bg-card-2 p-[40px] max-[560px]:p-[24px]">
+            <p className={`${eyebrow} mb-4`}>SEND A MESSAGE</p>
+            <h2 className={`${sectionTitle} mb-6 leading-[1.2]`}>
+              {inquiryType === 'General Inquiry' ? 'General Inquiries' : 'Membership Application'}
+            </h2>
+            
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5" encType="multipart/form-data">
+              {/* Hidden inputs for Web3Forms */}
+              <input type="hidden" name="subject" value={`New Submission: ${inquiryType} - Parbat NY`} />
+              <input type="hidden" name="inquiry_type" value={inquiryType} /> 
+              <input type="checkbox" name="botcheck" className="hidden" />
 
-            {/* NEW VISUAL SELECTOR */}
-            <div>
-              <label className="mb-3 block text-[14px] font-medium text-white">How can we help you?</label>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {formOptions.map((option) => (
-                  <button
-                    key={option}
-                    type="button"
-                    onClick={() => setInquiryType(option)}
-                    className={`rounded-[8px] border p-3 text-left text-[14px] transition-all ${
-                      inquiryType === option 
-                        ? 'border-red-soft bg-red-soft/10 text-white font-semibold' 
-                        : 'border-white/10 bg-card text-muted hover:border-white/30'
-                    }`}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Conditional Payment Section */}
-            {inquiryType !== 'General Inquiry' && (
-              <div className="rounded-[8px] border border-red-soft/30 bg-red-soft/5 p-5 my-2">
-                <h3 className="mb-2 font-serif text-[18px] font-semibold text-white">Payment Details</h3>
-                <p className="text-[14px] text-muted mb-4">
-                  Please scan the QR code below to pay for your <strong>{inquiryType}</strong>. Once paid, upload a screenshot of your receipt.
-                </p>
-                
-                <div className="mx-auto mb-4 flex h-[150px] w-[150px] items-center justify-center overflow-hidden rounded-[8px] bg-white">
-                  <img 
-                    src="/path-to-your-qr-code.png" 
-                    alt="Payment QR Code" 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="screenshot" className="mb-2 block text-[14px] font-medium text-white">Attach Payment Screenshot *</label>
-                  <input 
-                    type="file" 
-                    id="screenshot" 
-                    name="payment_screenshot" 
-                    accept="image/png, image/jpeg, image/webp" 
-                    required 
-                    className={`${inputClass} file:mr-4 file:rounded-[4px] file:border-0 file:bg-red-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-red-soft/90 cursor-pointer p-2`} 
-                  />
+              {/* NEW VISUAL SELECTOR */}
+              <div>
+                <label className="mb-3 block text-[14px] font-medium text-white">How can we help you?</label>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {formOptions.map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => setInquiryType(option)}
+                      className={`rounded-[8px] border p-3 text-left text-[14px] transition-all ${
+                        inquiryType === option 
+                          ? 'border-red-soft bg-red-soft/10 text-white font-semibold' 
+                          : 'border-white/10 bg-card text-muted hover:border-white/30'
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
                 </div>
               </div>
-            )}
 
-<div>
+              {/* Standard Information Fields (Name & Email) */}
+              <div>
                 <label htmlFor="name" className="sr-only">Full Name</label>
                 <input type="text" id="name" name="name" placeholder="Your Full Name" required className={inputClass} />
               </div>
@@ -144,6 +115,84 @@ export default function ContactPage() {
                 <label htmlFor="email" className="sr-only">Email Address</label>
                 <input type="email" id="email" name="email" placeholder="Your Email Address" required className={inputClass} />
               </div>
+
+              {/* CONDITIONAL MEMBERSHIP EXTRA FIELDS */}
+              {inquiryType !== 'General Inquiry' && (
+                <>
+                  {/* Phone number field */}
+                  <div>
+                    <label htmlFor="phone" className="sr-only">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      placeholder="Phone Number (e.g., +1 123-456-7890)" 
+                      required 
+                      className={inputClass} 
+                    />
+                  </div>
+
+                  {/* ID & Verification Documents Box */}
+                  <div className="rounded-[8px] border border-white/5 bg-card p-5 space-y-4">
+                    <h3 className="font-serif text-[16px] font-semibold text-white">Identification Verification</h3>
+                    <p className="text-[13px] text-muted">
+                      Please upload clear copies of your structural identifications to verify eligibility.
+                    </p>
+                    
+                    <div>
+                      <label htmlFor="state_id" className="mb-2 block text-[13px] font-medium text-white">State ID Photo *</label>
+                      <input 
+                        type="file" 
+                        id="state_id" 
+                        name="state_id_photo" 
+                        accept="image/png, image/jpeg, image/webp, application/pdf" 
+                        required 
+                        className={`${inputClass} file:mr-4 file:rounded-[4px] file:border-0 file:bg-red-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-red-soft/90 cursor-pointer p-2`} 
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="citizenship_photo" className="mb-2 block text-[13px] font-medium text-white">Citizenship Photo (Nepal/US) *</label>
+                      <input 
+                        type="file" 
+                        id="citizenship_photo" 
+                        name="citizenship_photo" 
+                        accept="image/png, image/jpeg, image/webp, application/pdf" 
+                        required 
+                        className={`${inputClass} file:mr-4 file:rounded-[4px] file:border-0 file:bg-red-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-red-soft/90 cursor-pointer p-2`} 
+                      />
+                    </div>
+                  </div>
+
+                  {/* Payment Box Section */}
+                  <div className="rounded-[8px] border border-red-soft/30 bg-red-soft/5 p-5">
+                    <h3 className="mb-2 font-serif text-[18px] font-semibold text-white">Payment Details</h3>
+                    <p className="text-[14px] text-muted mb-4">
+                      Please scan the QR code below to pay for your <strong>{inquiryType}</strong>. Once paid, upload a screenshot of your receipt.
+                    </p>
+                    
+                    <div className="mx-auto mb-4 flex h-[150px] w-[150px] items-center justify-center overflow-hidden rounded-[8px] bg-white">
+                      <img 
+                        src="/path-to-your-qr-code.png" 
+                        alt="Payment QR Code" 
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="screenshot" className="mb-2 block text-[14px] font-medium text-white">Attach Payment Screenshot *</label>
+                      <input 
+                        type="file" 
+                        id="screenshot" 
+                        name="payment_screenshot" 
+                        accept="image/png, image/jpeg, image/webp" 
+                        required 
+                        className={`${inputClass} file:mr-4 file:rounded-[4px] file:border-0 file:bg-red-soft file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-red-soft/90 cursor-pointer p-2`} 
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
 
               <div>
                 <label htmlFor="message" className="sr-only">Message</label>
@@ -171,8 +220,8 @@ export default function ContactPage() {
               {submitStatus === 'error' && (
                 <p className="mt-2 text-center text-[14px] text-red-500">Something went wrong. Please try again later.</p>
               )}
-          </form>
-        </Reveal>
+            </form>
+          </Reveal>
 
           {/* RIGHT COLUMN: JOIN US & WHATSAPP */}
           <Reveal>
