@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Work_Sans } from 'next/font/google';
 import './globals.css';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const serif = Playfair_Display({
   subsets: ['latin'],
@@ -29,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
-      <body>{children}</body>
+      <body><LanguageProvider>{children}</LanguageProvider></body>
     </html>
   );
 }

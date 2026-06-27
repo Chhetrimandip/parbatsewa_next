@@ -1,6 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import Reveal from './Reveal';
+import { useLanguage } from '@/contexts/LanguageContext';
+import translations from '@/lib/translations';
 
 const events = [
   {
@@ -50,14 +54,17 @@ function MetaIcon({ name }: { name: string }) {
 }
 
 export default function FeaturedWork() {
+  const { lang } = useLanguage();
+  const t = translations[lang].featured;
+
   return (
     <section id="events" className="px-[6%] pb-24 pt-20">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
         <Reveal>
           <p className="mb-[14px] block text-xs font-semibold tracking-[3px] text-red-soft">
-            IMPACT &amp; ENGAGEMENT
+            {t.eyebrow}
           </p>
-          <h2 className="font-serif text-[30px] font-bold">Featured Work</h2>
+          <h2 className="font-serif text-[30px] font-bold">{t.heading}</h2>
         </Reveal>
         <Reveal>
           <Link
@@ -68,7 +75,7 @@ export default function FeaturedWork() {
               <rect x="3" y="4" width="18" height="18" rx="2" />
               <path d="M3 10h18M8 2v4M16 2v4" />
             </svg>
-            VIEW ALL EVENTS
+            {t.viewAll}
           </Link>
         </Reveal>
       </div>
@@ -80,7 +87,6 @@ export default function FeaturedWork() {
             as="article"
             className="group relative flex min-h-[260px] cursor-pointer items-end overflow-hidden rounded-[11px] transition-transform duration-300 hover:-translate-y-1.5"
           >
-            {/* MEDIA: image when available, otherwise gradient background */}
             {ev.image ? (
               <Image
                 src={ev.image.src}
@@ -115,8 +121,7 @@ export default function FeaturedWork() {
                   </span>
                 ))}
               </div>
-              {/* Added description field to display the Nepali context elegantly */}
-              <p className="text-[12px] leading-relaxed text-white/70 line-clamp-3">
+              <p className="line-clamp-3 text-[12px] leading-relaxed text-white/70">
                 {ev.description}
               </p>
             </div>

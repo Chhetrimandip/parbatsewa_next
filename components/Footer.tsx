@@ -1,15 +1,8 @@
-import Link from 'next/link';
+'use client';
 
-const navItems = [
-  { label: 'About Us', href: '/about' },
-  { label: 'Our Events', href: '/events' },
-  { label: 'Contact', href: '/contact' },
-];
-const legal = [
-  { label: 'Privacy', href: '#privacy' },
-  { label: 'Terms', href: '#terms' },
-  { label: 'FAQ', href: '#faq' },
-];
+import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
+import translations from '@/lib/translations';
 
 const socialBox =
   'flex h-[38px] w-[38px] items-center justify-center rounded-[7px] bg-white/[0.06] text-[#c3c4ca] transition-colors hover:bg-red hover:text-white';
@@ -17,6 +10,14 @@ const flink = 'text-[13.5px] text-muted no-underline transition-colors hover:tex
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { lang } = useLanguage();
+  const t = translations[lang].footer;
+
+  const navItems = [
+    { label: t.navLinks.about, href: '/about' },
+    { label: t.navLinks.events, href: '/events' },
+    { label: t.navLinks.contact, href: '/contact' },
+  ];
 
   return (
     <footer id="contact" className="border-t border-white/5 bg-bg-soft px-[6%] pb-[30px] pt-16">
@@ -26,16 +27,15 @@ export default function Footer() {
             Parbat-NY
           </div>
           <p className="max-w-[330px] text-[13.5px] leading-[1.7] text-[#8a8b92]">
-            Preserving heritage and building future leaders within the Parbat
-            diaspora in the New York metropolitan area.
+            {t.description}
           </p>
         </div>
 
         <div>
-          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-white">NAVIGATION</h4>
+          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-white">{t.navHeading}</h4>
           <nav className="flex flex-col gap-3">
             {navItems.map((i) => (
-              <Link key={i.label} href={i.href} className={flink}>
+              <Link key={i.href} href={i.href} className={flink}>
                 {i.label}
               </Link>
             ))}
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-white">CONNECT</h4>
+          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-white">{t.connectHeading}</h4>
           <div className="flex gap-3">
             <a href="/contact" aria-label="Website" className={socialBox}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -67,12 +67,14 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] pt-[26px]">
-        <span className="text-[12.5px] text-faint">
-          © {year} Parbat Sewa Samaj New York. All Rights Reserved.
-        </span>
+        <span className="text-[12.5px] text-faint">{t.copyright(year)}</span>
         <div className="flex gap-7">
-          {legal.map((l) => (
-            <a key={l.label} href={l.href} className="text-[12.5px] text-[#8a8b92] no-underline transition-colors hover:text-red-soft">
+          {[
+            { label: t.legal.privacy, href: '#privacy' },
+            { label: t.legal.terms, href: '#terms' },
+            { label: t.legal.faq, href: '#faq' },
+          ].map((l) => (
+            <a key={l.href} href={l.href} className="text-[12.5px] text-[#8a8b92] no-underline transition-colors hover:text-red-soft">
               {l.label}
             </a>
           ))}

@@ -8,10 +8,14 @@ interface EventGalleryProps {
 }
 
 export default function EventGallery({ images }: EventGalleryProps) {
-  // 1. Set the initial active image to the first image in the array
-  const [activeImage, setActiveImage] = useState<string | undefined>(images[0]);
+  // Drop any null/empty URLs — Sanity returns null for unresolved image assets,
+  // and passing src={null} to next/image crashes prerendering.
+  const validImages = images.filter((src): src is string => Boolean(src));
 
-  if (images.length === 0) {
+  // Set the initial active image to the first valid image in the array
+  const [activeImage, setActiveImage] = useState<string | undefined>(validImages[0]);
+
+  if (validImages.length === 0) {
     return (
       <div className="flex h-[420px] items-center justify-center bg-[radial-gradient(circle_at_top_left,rgba(255,110,125,0.16),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(197,111,255,0.16),transparent_40%)] rounded-[18px]">
         <span className="text-sm uppercase tracking-[2px] text-white/40">No event image available</span>
@@ -40,7 +44,7 @@ export default function EventGallery({ images }: EventGalleryProps) {
       <div className="rounded-[18px] border border-white/5 bg-[#15151a] p-7 self-start">
         <p className="mb-6 text-xs font-semibold uppercase tracking-[3px] text-red-soft">Event gallery</p>
         <div className="grid grid-cols-2 gap-3">
-          {images.map((src, index) => {
+          {validImages.map((src, index) => {
             const isActive = src === activeImage;
             return (
               <button

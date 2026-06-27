@@ -1,14 +1,21 @@
+'use client';
+
 import CTABand from './CTABand';
+import { useLanguage } from '@/contexts/LanguageContext';
+import translations from '@/lib/translations';
 
 export default function JoinCTA() {
+  const { lang } = useLanguage();
+  const t = translations[lang].joinCta;
+
   return (
     <div id="join">
       <CTABand
-        kicker="Ready to make a difference?"
-        text="Join our growing network of Parbat professionals and community members in New York. Let's build a stronger future together."
-        primaryLabel="JOIN TODAY"
+        kicker={t.kicker}
+        text={t.text}
+        primaryLabel={t.primary}
         primaryHref="/contact"
-        secondaryLabel="EXPLORE EVENTS"
+        secondaryLabel={t.secondary}
         secondaryHref="/events"
       />
     </div>
