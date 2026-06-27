@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface EventGalleryProps {
   images: string[];
@@ -22,11 +23,16 @@ export default function EventGallery({ images }: EventGalleryProps) {
     <div className="grid grid-cols-[1.1fr_0.9fr] gap-10 max-[980px]:grid-cols-1">
       {/* LEFT COLUMN: Main Feature Image */}
       <div className="rounded-[18px] border border-white/5 bg-[#121216] p-7 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-        <div className="relative overflow-hidden rounded-[18px] bg-[#0c0c0f] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]">
-          <div
-            className="h-[420px] bg-cover bg-center transition-all duration-300"
-            style={{ backgroundImage: `url(${activeImage})` }}
-          />
+        <div className="relative h-[420px] overflow-hidden rounded-[18px] bg-[#0c0c0f] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]">
+          {activeImage && (
+            <Image
+              src={activeImage}
+              alt="Event photo"
+              fill
+              className="object-cover transition-all duration-300"
+              sizes="(max-width: 980px) 100vw, 55vw"
+            />
+          )}
         </div>
       </div>
 
@@ -40,13 +46,16 @@ export default function EventGallery({ images }: EventGalleryProps) {
               <button
                 key={index}
                 onClick={() => setActiveImage(src)}
-                className={`group relative overflow-hidden rounded-[14px] bg-[#0d0d10] focus:outline-none border-2 transition-all duration-200 ${
+                className={`group relative h-[120px] overflow-hidden rounded-[14px] bg-[#0d0d10] focus:outline-none border-2 transition-all duration-200 ${
                   isActive ? 'border-red scale-[0.98]' : 'border-transparent opacity-70 hover:opacity-100'
                 }`}
               >
-                <div 
-                  className="h-[120px] bg-cover bg-center transition-transform duration-300 group-hover:scale-105" 
-                  style={{ backgroundImage: `url(${src})` }} 
+                <Image
+                  src={src}
+                  alt={`Gallery image ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 980px) 50vw, 22vw"
                 />
               </button>
             );

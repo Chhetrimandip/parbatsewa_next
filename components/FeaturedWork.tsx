@@ -85,12 +85,12 @@ export default function FeaturedWork() {
               <Image
                 src={ev.image.src}
                 alt={ev.image.alt}
-                width={ev.image.width}
-                height={ev.image.height}
-                className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-[600ms] group-hover:scale-[1.07]"
+                fill
+                className="object-cover object-top transition-transform duration-[600ms] group-hover:scale-[1.07]"
+                sizes="(max-width: 760px) 100vw, 50vw"
               />
             ) : (
-              <div className={`absolute inset-0 bg-cover bg-center transition-transform duration-[600ms] group-hover:scale-[1.07] ${ev.media}`} />
+              <div className={`absolute inset-0 transition-transform duration-[600ms] group-hover:scale-[1.07] ${ev.media}`} />
             )}
             <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,255,255,0.05)_0_2px,transparent_2px_8px)]" />
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(8,8,10,0.98)_10%,transparent_75%)]" />

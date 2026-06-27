@@ -5,8 +5,15 @@ import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import CTABand from '@/components/CTABand';
 import Footer from '@/components/Footer';
-import { getEventBySlug } from '@/sanity/lib/api';
-import EventGallery from '@/components/EventGallery'; // Import the new component
+import { getEventBySlug, getEventSlugs } from '@/sanity/lib/api';
+import EventGallery from '@/components/EventGallery';
+
+export const revalidate = 86400; // ISR: revalidate once per day
+
+export async function generateStaticParams() {
+  const slugs = await getEventSlugs();
+  return slugs.map(({ slug }) => ({ slug }));
+}
 
 interface EventPageProps {
   params: { slug: string };

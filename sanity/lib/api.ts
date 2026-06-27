@@ -1,6 +1,6 @@
 import { client } from './client';
 import { sanityEnabled } from '../env';
-import { eventsQuery, featuredEventQuery, eventBySlugQuery } from './queries';
+import { eventsQuery, featuredEventQuery, eventBySlugQuery, allSlugsQuery } from './queries';
 
 export interface SanityEvent {
   _id: string;
@@ -33,7 +33,7 @@ export interface SanityFeaturedEvent {
 export async function getEvents(): Promise<SanityEvent[] | null> {
   if (!sanityEnabled) return null;
   try {
-    return await client.fetch(eventsQuery, {}, { next: { revalidate: 60 } });
+    return await client.fetch(eventsQuery, {}, { next: { revalidate: 86400 } });
   } catch (err) {
     console.error('Sanity getEvents failed:', err);
     return null;
@@ -43,7 +43,7 @@ export async function getEvents(): Promise<SanityEvent[] | null> {
 export async function getFeaturedEvent(): Promise<SanityFeaturedEvent | null> {
   if (!sanityEnabled) return null;
   try {
-    return await client.fetch(featuredEventQuery, {}, { next: { revalidate: 60 } });
+    return await client.fetch(featuredEventQuery, {}, { next: { revalidate: 86400 } });
   } catch (err) {
     console.error('Sanity getFeaturedEvent failed:', err);
     return null;
@@ -53,9 +53,20 @@ export async function getFeaturedEvent(): Promise<SanityFeaturedEvent | null> {
 export async function getEventBySlug(slug: string): Promise<SanityEvent | null> {
   if (!sanityEnabled) return null;
   try {
-    return await client.fetch(eventBySlugQuery, { slug }, { next: { revalidate: 60 } });
+    return await client.fetch(eventBySlugQuery, { slug }, { next: { revalidate: 86400 } });
   } catch (err) {
     console.error('Sanity getEventBySlug failed:', err);
     return null;
+  }
+}
+
+/** Returns all event slugs for use with generateStaticParams. */
+export async function getEventSlugs(): Promise<{ slug: string }[]> {
+  if (!sanityEnabled) return [];
+  try {
+    return await client.fetch(allSlugsQuery, {}, { next: { revalidate: 86400 } });
+  } catch (err) {
+    console.error('Sanity getEventSlugs failed:', err);
+    return [];
   }
 }

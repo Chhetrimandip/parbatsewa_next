@@ -45,3 +45,10 @@ export const eventBySlugQuery = groq`
     "images": images[].asset->url
   }
 `;
+
+/** All event slugs — used for generateStaticParams. */
+export const allSlugsQuery = groq`
+  *[_type == "event" && defined(slug.current)] {
+    "slug": slug.current
+  }
+`;

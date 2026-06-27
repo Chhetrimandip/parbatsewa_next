@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Reveal from './Reveal';
 
 interface EventCardProps {
@@ -31,12 +32,17 @@ export default function EventCard({
     >
       <div className="relative h-[150px] overflow-hidden">
         {/* MEDIA: Sanity image if present, else themed gradient */}
-        <div
-          className={`absolute inset-0 bg-cover bg-center transition-transform duration-[600ms] group-hover:scale-[1.07] ${
-            imageUrl ? '' : themeGradient[theme]
-          }`}
-          style={imageUrl ? { backgroundImage: `url(${imageUrl})` } : undefined}
-        />
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            className="object-cover object-center transition-transform duration-[600ms] group-hover:scale-[1.07]"
+            sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 33vw"
+          />
+        ) : (
+          <div className={`absolute inset-0 transition-transform duration-[600ms] group-hover:scale-[1.07] ${themeGradient[theme]}`} />
+        )}
         <div className="absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,255,255,0.05)_0_2px,transparent_2px_8px)]" />
         {badge && (
           <span className="absolute left-[14px] top-3 rounded-[4px] bg-red/90 px-2.5 py-1 text-[9.5px] font-semibold tracking-[1px] text-white">

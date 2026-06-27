@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { getEvents, getFeaturedEvent } from '@/sanity/lib/api';
 import Link from 'next/link';
 
+export const revalidate = 86400; // ISR: revalidate once per day
+
 export const metadata: Metadata = { title: 'Events & Initiatives — Parbat-NY' };
 
 const fallbackEvents = [
@@ -98,24 +100,19 @@ export default async function EventsPage() {
           <section className="px-[6%] pb-[70px] pt-5">
             <Reveal className="relative flex min-h-[300px] items-end overflow-hidden rounded-[14px]">
               {featured.imageUrl ? (
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${featured.imageUrl})` }}
+                <Image
+                  src={featured.imageUrl}
+                  alt={featured.title}
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 88vw"
+                  priority
                 />
               ) : (
                 <div className="absolute inset-0 bg-[radial-gradient(100%_120%_at_75%_20%,#7a3a44_0%,#3a1820_50%,#16080c_100%)]" />
               )}
               <div className="absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,160,170,0.06)_0_2px,transparent_2px_8px)]" />
               <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,6,8,0.92)_0%,rgba(8,6,8,0.5)_55%,transparent_100%)]" />
-              {!featured.imageUrl && (
-                <span className="absolute right-[18px] top-4 font-mono text-[10px] text-white/[0.32]">
-                  {featured.imageUrl ? (
-                    <Image src={featured.imageUrl} alt="Featured" fill className="object-cover" />
-                  ) : (
-                    "No image"
-                  )}
-                </span>
-              )}
               <div className="relative z-[2] max-w-[560px] p-11">
                 <span className="mb-[18px] inline-block rounded-[4px] bg-red px-[13px] py-1.5 text-[10px] font-semibold tracking-[1.5px] text-white">
                   NEXT UP

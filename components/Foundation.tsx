@@ -49,7 +49,7 @@ export default function LeadershipMessages() {
         <Reveal className="flex flex-col items-center rounded-[10px] border border-white/5 bg-card-2 p-[30px] text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_44px_rgba(0,0,0,0.42)] md:items-start md:text-left">
           {/* Image Placeholder 3 */}
           <div className="mb-8 flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white/5 bg-white/10 md:h-40 md:w-40">
-            <Image alt="Founding General Secretary" height={200} width={200} src={"/prakash.jpg"}/>
+            <Image alt="Founding General Secretary" height={200} width={200} src={"/prakash_sharma.jpeg"}/>
           </div>
 
           <div className="space-y-4 text-[14.5px] leading-[1.75] text-muted-2 flex-grow">
@@ -102,7 +102,7 @@ export default function LeadershipMessages() {
         <Reveal className="flex flex-col items-center rounded-[10px] border border-white/5 bg-card-2 p-[30px] text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_44px_rgba(0,0,0,0.42)] md:items-start md:text-left">
           {/* Image Placeholder 4 */}
           <div className="mb-8 flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-full border-4 border-white/5 bg-white/10 md:h-40 md:w-40">
-            <Image alt="President 2026-2028" height={200} width={200} src={"/president-current.jpg"}/>
+            <Image alt="President 2026-2028" height={200} width={200} src={"/purna.jpeg"}/>
           </div>
 
           <div className="space-y-4 text-[14.5px] leading-[1.75] text-muted-2 flex-grow">

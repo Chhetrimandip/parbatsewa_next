@@ -3,8 +3,17 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="relative flex min-h-[560px] items-end overflow-hidden px-[6%] pb-16">
-      {/* BACKGROUND: swap the gradient below for bg-[url('/herobg.png')] */}
-      <div className="absolute inset-0 animate-kenburns bg-cover bg-center bg-[url('/hero.jpeg')]" />
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 animate-kenburns">
+        <Image
+          src="/hero.jpeg"
+          alt="Parbat community"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </div>
       <div className="absolute inset-0 bg-[repeating-linear-gradient(115deg,rgba(255,170,90,0.05)_0_3px,transparent_3px_9px)]" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,13,15,0.92)_0%,rgba(13,13,15,0.62)_38%,rgba(13,13,15,0.25)_100%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(0deg,#0d0d0f_2%,transparent_30%)]" />

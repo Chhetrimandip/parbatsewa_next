@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import PageHero from '@/components/PageHero';
 import Footer from '@/components/Footer';
@@ -172,9 +173,11 @@ export default function ContactPage() {
                     </p>
                     
                     <div className="mx-auto mb-4 flex h-[150px] w-[150px] items-center justify-center overflow-hidden rounded-[8px] bg-white">
-                      <img 
-                        src="/path-to-your-qr-code.png" 
-                        alt="Payment QR Code" 
+                      <Image
+                        src="/path-to-your-qr-code.png"
+                        alt="Payment QR Code"
+                        width={150}
+                        height={150}
                         className="h-full w-full object-cover"
                       />
                     </div>
