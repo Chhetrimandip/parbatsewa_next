@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import PageHero from '@/components/PageHero';
 import TeamMember from '@/components/TeamMember';
@@ -91,9 +92,12 @@ export default function AboutContent() {
           </Reveal>
           <Reveal className="relative min-h-[340px] overflow-hidden rounded-xl bg-[radial-gradient(100%_100%_at_30%_20%,#5a3520_0%,#2a1810_55%,#150c08_100%)]">
             <div className="absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,200,110,0.06)_0_2px,transparent_2px_8px)]" />
-            <span className="absolute inset-0 flex items-center justify-center font-mono text-xs text-white/[0.34]">
-              {t.story.imgPlaceholder}
-            </span>
+            <Image
+              src="/community.jpeg"
+              alt={ 'Community photo'}
+              fill
+              className="object-cover"
+            />
           </Reveal>
         </section>
 
