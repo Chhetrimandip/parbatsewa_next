@@ -73,6 +73,13 @@ export const event = defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'upcoming',
+      title: 'Coming Soon teaser',
+      type: 'boolean',
+      description: 'Show this event in the "Coming Up" strip without needing a flyer or exact date. Turn off once you have a real flyer and it will move to the main grid.',
+      initialValue: false,
+    }),
+    defineField({
       name: 'images',
       title: 'Images',
       type: 'array',

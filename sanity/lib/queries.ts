@@ -1,8 +1,8 @@
 import { groq } from 'next-sanity';
 
-/** All non-featured events, newest first — shown in the Events page grid. */
+/** All non-featured, non-upcoming events, newest first — shown in the Events page grid. */
 export const eventsQuery = groq`
-  *[_type == "event" && featured != true] | order(date desc) {
+  *[_type == "event" && featured != true && upcoming != true] | order(date desc) {
     _id,
     title,
     "slug": slug.current,
@@ -12,6 +12,17 @@ export const eventsQuery = groq`
     timeframe,
     description,
     "imageUrl": images[0].asset->url
+  }
+`;
+
+/** Coming-soon teasers — events with upcoming == true. */
+export const upcomingEventsQuery = groq`
+  *[_type == "event" && upcoming == true] | order(date asc) {
+    _id,
+    title,
+    timeframe,
+    location,
+    badge
   }
 `;
 

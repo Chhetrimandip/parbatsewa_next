@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import Reveal from '@/components/Reveal';
 import { useLanguage } from '@/contexts/LanguageContext';
 import translations from '@/lib/translations';
+import type { SanityUpcomingEvent } from '@/sanity/lib/api';
 
 interface EventItem {
   key: string;
@@ -35,9 +36,10 @@ interface Props {
   mainEvents: EventItem[];
   partnerFlyers: EventItem[];
   featured: FeaturedEvent;
+  upcomingEvents: SanityUpcomingEvent[];
 }
 
-export default function EventsContent({ mainEvents, partnerFlyers, featured }: Props) {
+export default function EventsContent({ mainEvents, partnerFlyers, featured, upcomingEvents }: Props) {
   const { lang } = useLanguage();
   const t = translations[lang].events;
 
@@ -104,6 +106,45 @@ export default function EventsContent({ mainEvents, partnerFlyers, featured }: P
             </Reveal>
           </section>
         </Link>
+
+        {/* COMING UP */}
+        {upcomingEvents.length > 0 && (
+          <section className="px-[6%] pb-14">
+            <Reveal className="mb-7">
+              <p className="mb-[10px] block text-xs font-semibold tracking-[3px] text-red-soft">
+                {lang === 'en' ? 'COMING UP' : 'आउँदो'}
+              </p>
+              <h2 className="font-serif text-[26px] font-bold">
+                {lang === 'en' ? 'On the Horizon' : 'आगामी कार्यक्रमहरू'}
+              </h2>
+            </Reveal>
+            <div className="flex flex-col gap-3">
+              {upcomingEvents.map((e) => (
+                <Reveal
+                  key={e._id}
+                  className="flex items-center gap-5 rounded-[10px] border border-white/[0.07] bg-card px-6 py-5"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red/10 text-red-soft">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M3 10h18M8 2v4M16 2v4" />
+                    </svg>
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif text-[16px] font-bold leading-snug">{e.title}</p>
+                    {(e.timeframe || e.location) && (
+                      <p className="mt-0.5 text-[12px] text-muted">
+                        {[e.timeframe, e.location].filter(Boolean).join(' · ')}
+                      </p>
+                    )}
+                  </div>
+                  <span className="shrink-0 rounded-[4px] bg-red/80 px-2.5 py-1 text-[9px] font-semibold tracking-[1px] text-white">
+                    {lang === 'en' ? 'COMING SOON' : 'छिट्टै आउँदैछ'}
+                  </span>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* HIGHLIGHTS GRID */}
         <section className="px-[6%] pb-16">

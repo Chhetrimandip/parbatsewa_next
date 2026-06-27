@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { getEvents, getFeaturedEvent } from '@/sanity/lib/api';
+import { getEvents, getFeaturedEvent, getUpcomingEvents } from '@/sanity/lib/api';
+import type { SanityUpcomingEvent } from '@/sanity/lib/api';
 import EventsContent from './EventsContent';
 
 export const revalidate = 86400;
@@ -35,7 +36,9 @@ function formatDate(iso?: string) {
 }
 
 export default async function EventsPage() {
-  const [sanityEvents, sanityFeatured] = await Promise.all([getEvents(), getFeaturedEvent()]);
+  const [sanityEvents, sanityFeatured, sanityUpcoming] = await Promise.all([
+    getEvents(), getFeaturedEvent(), getUpcomingEvents(),
+  ]);
 
   const allEvents =
     sanityEvents && sanityEvents.length > 0
@@ -65,11 +68,14 @@ export default async function EventsPage() {
       }
     : fallbackFeatured;
 
+  const upcomingEvents: SanityUpcomingEvent[] = sanityUpcoming ?? [];
+
   return (
     <EventsContent
       mainEvents={mainEvents}
       partnerFlyers={partnerFlyers}
       featured={featured}
+      upcomingEvents={upcomingEvents}
     />
   );
 }
