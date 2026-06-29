@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
 interface EventGalleryProps {
@@ -10,6 +11,10 @@ interface EventGalleryProps {
 export default function EventGallery({ images }: EventGalleryProps) {
   const validImages = images.filter((src): src is string => Boolean(src));
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Portals need the DOM — only render the overlay after mount.
+  useEffect(() => setMounted(true), []);
 
   const isOpen = lightboxIndex !== null;
 
@@ -52,84 +57,77 @@ export default function EventGallery({ images }: EventGalleryProps) {
       <div className="rounded-[18px] border border-white/5 bg-[#15151a] p-6">
         <p className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-red-soft">Event gallery</p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {validImages.map((src, index) => {
-            const isActive = lightboxIndex === index;
-            return (
-              <button
-                key={index}
-                onClick={() => setLightboxIndex(index)}
-                className={`group relative h-[130px] overflow-hidden rounded-[12px] bg-[#0d0d10] border transition-all duration-200 focus:outline-none ${
-                  isActive ? 'border-white/40 ring-2 ring-white/20' : 'border-white/5 hover:border-white/20'
-                }`}
-              >
-                <Image
-                  src={src}
-                  alt={`Gallery image ${index + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 640px) 50vw, 33vw"
-                />
-                {/* dark overlay on active thumb */}
-                <div className={`absolute inset-0 transition-colors duration-200 ${
-                  isActive ? 'bg-black/50' : 'bg-black/0 group-hover:bg-black/25'
-                }`} />
-              </button>
-            );
-          })}
+          {validImages.map((src, index) => (
+            <button
+              key={index}
+              onClick={() => setLightboxIndex(index)}
+              className="group relative h-[130px] overflow-hidden rounded-[12px] bg-[#0d0d10] border border-white/5 hover:border-white/25 transition-all duration-200 focus:outline-none"
+            >
+              <Image
+                src={src}
+                alt={`Gallery image ${index + 1}`}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 640px) 50vw, 33vw"
+              />
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Lightbox */}
-      {isOpen && lightboxIndex !== null && (
+      {/* Lightbox — portaled to <body> so `fixed` covers the real browser window
+          (a transformed <Reveal> ancestor would otherwise break position:fixed). */}
+      {mounted && isOpen && lightboxIndex !== null && createPortal(
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black"
           onClick={close}
         >
-          {/* Image — natural size, click on it doesn't close */}
+          {/* Whole image, biggest it can be on screen, aspect kept, black fills the rest */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={validImages[lightboxIndex]}
             alt={`Gallery image ${lightboxIndex + 1}`}
-            className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
+            className="max-h-screen max-w-screen w-auto h-auto object-contain"
             onClick={(e) => e.stopPropagation()}
           />
 
-          {/* Close — fixed so it's always reachable */}
+          {/* Close — top-right of the screen, always */}
           <button
             onClick={close}
-            className="fixed top-4 right-4 z-60 flex h-11 w-11 items-center justify-center rounded-full bg-black/70 hover:bg-black/90 border border-white/25 transition-colors text-white text-lg"
+            className="fixed top-4 right-4 z-[10000] flex h-12 w-12 items-center justify-center rounded-full bg-black/70 hover:bg-black border border-white/30 text-white text-xl"
             aria-label="Close"
           >
             ✕
           </button>
 
-          {/* Counter */}
-          <span className="fixed top-5 left-1/2 -translate-x-1/2 z-60 px-3 py-1 rounded-full bg-black/60 text-xs text-white/80 tracking-widest">
+          {/* Counter — top-left */}
+          <span className="fixed top-5 left-4 z-[10000] px-3 py-1.5 rounded-full bg-black/70 border border-white/20 text-xs text-white tracking-widest pointer-events-none">
             {lightboxIndex + 1} / {validImages.length}
           </span>
 
-          {/* Prev */}
+          {/* Prev — middle-left of the screen */}
           {validImages.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); prev(); }}
-              className="fixed left-3 sm:left-6 top-1/2 -translate-y-1/2 z-60 flex h-12 w-12 items-center justify-center rounded-full bg-black/70 hover:bg-black/90 border border-white/25 transition-colors text-white text-2xl"
+              className="fixed left-4 top-1/2 -translate-y-1/2 z-[10000] flex h-12 w-12 items-center justify-center rounded-full bg-black/70 hover:bg-black border border-white/30 text-white text-2xl"
               aria-label="Previous image"
             >
               ‹
             </button>
           )}
 
-          {/* Next */}
+          {/* Next — middle-right of the screen */}
           {validImages.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); next(); }}
-              className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-60 flex h-12 w-12 items-center justify-center rounded-full bg-black/70 hover:bg-black/90 border border-white/25 transition-colors text-white text-2xl"
+              className="fixed right-4 top-1/2 -translate-y-1/2 z-[10000] flex h-12 w-12 items-center justify-center rounded-full bg-black/70 hover:bg-black border border-white/30 text-white text-2xl"
               aria-label="Next image"
             >
               ›
             </button>
           )}
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

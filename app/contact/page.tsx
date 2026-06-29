@@ -80,18 +80,34 @@ export default function ContactPage() {
               <label className="mb-3 block text-[14px] font-medium text-white">{t.form.helpLabel}</label>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {t.form.options.map((option, idx) => (
-                  <button
-                    key={option}
-                    type="button"
-                    onClick={() => setInquiryIndex(idx)}
-                    className={`rounded-[8px] border p-3 text-left text-[14px] transition-all ${
-                      inquiryIndex === idx
-                        ? 'border-red-soft bg-red-soft/10 text-white font-semibold'
-                        : 'border-white/10 bg-card text-muted hover:border-white/30'
-                    }`}
-                  >
-                    {option}
-                  </button>
+                  <div key={option} className="contents">
+                    <button
+                      type="button"
+                      onClick={() => setInquiryIndex(idx)}
+                      className={`rounded-[8px] border p-3 text-left text-[14px] transition-all ${
+                        inquiryIndex === idx
+                          ? 'border-red-soft bg-red-soft/10 text-white font-semibold'
+                          : 'border-white/10 bg-card text-muted hover:border-white/30'
+                      }`}
+                    >
+                      {option}
+                    </button>
+                    {idx === 0 && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          document.getElementById('whatsapp-contacts')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        }
+                        className="flex items-center justify-between gap-2 rounded-[8px] border border-red-soft/40 bg-red-soft/5 p-3 text-left text-[14px] font-semibold text-red-soft transition-colors hover:bg-red-soft/10"
+                      >
+                        {lang === 'en' ? 'Sign up for dollar a Day — Support Us' : 'डलर अ डे — सहयोग गर्नुहोस्'}
+                        <svg className="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="12" y1="5" x2="12" y2="19" />
+                          <polyline points="19 12 12 19 5 12" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -218,7 +234,7 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div id="whatsapp-contacts" className="flex scroll-mt-24 flex-col gap-4">
               {[
                 { name: 'Prakash Sharma', phone: '14437209575' },
                 { name: 'Purna Shrestha', phone: '17039947933' },
