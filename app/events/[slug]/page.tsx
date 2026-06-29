@@ -9,7 +9,7 @@ import { getEventBySlug, getEventSlugs } from '@/sanity/lib/api';
 import EventGallery from '@/components/EventGallery';
 
 export const revalidate = 86400; // ISR: revalidate once per day
-
+//claude mcp add magic --scope user --env API_KEY="b1fe2b7a15ece582a3707459c2a16d13cb4e76faf540264871d7475e53326511" -- npx -y @21st-dev/magic@latest
 export async function generateStaticParams() {
   const slugs = await getEventSlugs();
   return slugs.map(({ slug }) => ({ slug }));
