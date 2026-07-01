@@ -27,7 +27,7 @@ const team = [
 
 const board = [
   { name: 'Daya Rijal', role: 'Board of Director', photo: '/committee/director-daya-rijal.jpeg' },
-  { name: 'Kishor Shrestha', role: 'Board of Director' },
+  { name: 'Kishor Shrestha', role: 'Board of Director',photo: '/committee/Kishor Shrestha.jpeg' },
   { name: 'Sudin Kumar Pariyar', role: 'Board of Director', photo: '/committee/director-sudin-pariyar.jpeg' },
   { name: 'Youbak Shrestha', role: 'Board of Director', photo: '/committee/director-youbak-shrestha.jpeg' },
   { name: 'Yam Prasad Rijal', role: 'Board of Director', photo: '/committee/director-yam-prasad-rijal.jpeg' },
