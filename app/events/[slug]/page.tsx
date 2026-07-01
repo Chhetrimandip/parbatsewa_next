@@ -7,6 +7,7 @@ import CTABand from '@/components/CTABand';
 import Footer from '@/components/Footer';
 import { getEventBySlug, getEventSlugs } from '@/sanity/lib/api';
 import EventGallery from '@/components/EventGallery';
+import { SITE_URL, SITE_NAME } from '@/lib/site';
 
 export const revalidate = 86400; // ISR: revalidate once per day
 //claude mcp add magic --scope user --env API_KEY="b1fe2b7a15ece582a3707459c2a16d13cb4e76faf540264871d7475e53326511" -- npx -y @21st-dev/magic@latest
@@ -35,14 +36,32 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
   const event = await getEventBySlug(params.slug);
   if (!event) {
     return {
-      title: 'Event — Parbat-NY',
+      title: 'Event',
       description: 'Event details for Parbat-NY',
     };
   }
 
+  const description = event.description ?? `Details for ${event.title}`;
+  const canonical = `/events/${params.slug}`;
+  const image = event.imageUrl ?? event.images?.[0] ?? '/logo.png';
+
   return {
-    title: `${event.title} — Parbat-NY`,
-    description: event.description ?? `Details for ${event.title}`,
+    title: event.title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: `${SITE_URL}${canonical}`,
+      title: event.title,
+      description,
+      images: [{ url: image, alt: event.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: event.title,
+      description,
+      images: [image],
+    },
   };
 }
 
@@ -52,6 +71,24 @@ export default async function EventPage({ params }: EventPageProps) {
 
   const images = event.images ?? [];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    description: event.description ?? undefined,
+    startDate: event.date ?? undefined,
+    url: `${SITE_URL}/events/${event.slug ?? ''}`,
+    image: images.length > 0 ? images : event.imageUrl ? [event.imageUrl] : undefined,
+    location: event.location
+      ? { '@type': 'Place', name: event.location }
+      : undefined,
+    organizer: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  };
+
   const eventDetails = [
     { label: 'Location', value: event.location },
     { label: 'Timeframe', value: event.timeframe },
@@ -60,6 +97,10 @@ export default async function EventPage({ params }: EventPageProps) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <main>
         <PageHero

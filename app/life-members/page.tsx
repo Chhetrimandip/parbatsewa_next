@@ -4,7 +4,12 @@ import LifeMembersContent from './LifeMembersContent';
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = { title: 'Life Members — Parbat-NY' };
+export const metadata: Metadata = {
+  title: 'Life Members',
+  description:
+    'Meet the life members whose lasting commitment sustains Parbat Sewa Samaj New York.',
+  alternates: { canonical: '/life-members' },
+};
 
 const fallbackMembers: SanityLifeMember[] = [];
 

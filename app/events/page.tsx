@@ -5,7 +5,12 @@ import EventsContent from './EventsContent';
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = { title: 'Events & Initiatives — Parbat-NY' };
+export const metadata: Metadata = {
+  title: 'Events & Initiatives',
+  description:
+    'Explore Parbat-NY events — cultural gatherings, health drives, heritage celebrations, and community support programs.',
+  alternates: { canonical: '/events' },
+};
 
 const fallbackEvents = [
   { title: 'Annual Blood Donation Drive', slug: '/events', badge: 'HEALTH', theme: 'red' as const,
