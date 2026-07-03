@@ -192,6 +192,16 @@ export default function ContactPage() {
                   {isSubmitting ? t.form.sending : t.form.submitInquiry}
                 </button>
 
+                <p className="text-center text-[12px] leading-[1.6] text-muted">
+                  {lang === 'en' ? (
+                    <>By submitting, you agree to our{' '}
+                      <a href="/privacy" className="text-red-soft underline hover:opacity-80">Privacy Policy</a>.</>
+                  ) : (
+                    <>पेश गरेर, तपाईं हाम्रो{' '}
+                      <a href="/privacy" className="text-red-soft underline hover:opacity-80">गोपनीयता नीति</a>मा सहमत हुनुहुन्छ।</>
+                  )}
+                </p>
+
                 {submitStatus === 'success' && (
                   <p className="mt-2 text-center text-[14px] text-green-500">{t.form.successMsg}</p>
                 )}

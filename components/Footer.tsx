@@ -70,15 +70,9 @@ export default function Footer() {
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] pt-[26px]">
         <span className="text-[12.5px] text-faint">{t.copyright(year)}</span>
         <div className="flex gap-7">
-          {[
-            { label: t.legal.privacy, href: '#privacy' },
-            { label: t.legal.terms, href: '#terms' },
-            { label: t.legal.faq, href: '#faq' },
-          ].map((l) => (
-            <a key={l.href} href={l.href} className="text-[12.5px] text-[#8a8b92] no-underline transition-colors hover:text-red-soft">
-              {l.label}
-            </a>
-          ))}
+          <Link href="/privacy" className="text-[12.5px] text-[#8a8b92] no-underline transition-colors hover:text-red-soft">
+            {t.legal.privacy}
+          </Link>
         </div>
       </div>
     </footer>
