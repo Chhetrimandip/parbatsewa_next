@@ -11,7 +11,7 @@ const events = [
     title: 'स्वर्गीय लक्ष्मण मल्लको परिवारलाई सहयोग',
     badge: 'FUNDRAISER HANDOVER',
     badgeGlass: false,
-    media: 'bg-[radial-gradient(90%_80%_at_50%_30%,#7a5418_0%,#3a2810_55%,#180f06_100%)]',
+    media: 'bg-bg-soft',
     placeholder: '[ GoFundMe Handover Photo ]',
     meta: [
       { icon: 'pin', text: '$8,830 / NRS 1,193,303 Transferred' },
@@ -23,7 +23,7 @@ const events = [
     title: 'अमन खानको उद्धार तथा नेपाल फिर्ती',
     badge: 'COMMUNITY RESCUE',
     badgeGlass: true,
-    media: 'bg-[radial-gradient(90%_80%_at_50%_35%,#2f5a32_0%,#1c3a20_55%,#0c1a0e_100%)]',
+    media: 'bg-bg-soft',
     image: { src: '/amankhan_rescued.jpg', height: 200, width: 200, alt: 'aman khan rescued' },
     meta: [{ icon: 'home', text: 'Safe Return to Nepal (Aug 8)' }],
     description: 'न्युजर्सी राज्यको हाइवेमा पुलिसद्वारा उद्धार गरिएका २१ वर्षीय युवक अमन खानलाई परिवारको अनुरोधमा NRNA NCC USA र पर्वत सेवा समाजको सहयोगमा अगस्ट ८ तारिख नेपाल पठाइएको छ।',
@@ -61,15 +61,15 @@ export default function FeaturedWork() {
     <section id="events" className="px-[6%] pb-24 pt-20">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
         <Reveal>
-          <p className="mb-[14px] block text-xs font-semibold tracking-[3px] text-red-soft">
+          <p className="mb-[14px] block text-xs font-semibold tracking-[3px] text-red">
             {t.eyebrow}
           </p>
-          <h2 className="font-serif text-[30px] font-bold">{t.heading}</h2>
+          <h2 className="font-serif text-[30px] font-bold text-ink">{t.heading}</h2>
         </Reveal>
         <Reveal>
           <Link
             href="/events"
-            className="inline-flex items-center gap-[9px] rounded-md border border-white/[0.14] bg-white/[0.06] px-5 py-3 text-xs font-semibold tracking-[1px] text-white no-underline transition-colors hover:bg-white/[0.13]"
+            className="inline-flex items-center gap-[9px] rounded-lg border-[1.5px] border-blue bg-transparent px-5 py-3 text-xs font-semibold tracking-[1px] text-blue no-underline transition-colors hover:bg-blue/5"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -85,7 +85,7 @@ export default function FeaturedWork() {
           <Reveal
             key={ev.title}
             as="article"
-            className="group relative flex min-h-[260px] cursor-pointer items-end overflow-hidden rounded-[11px] transition-transform duration-300 hover:-translate-y-1.5"
+            className="group relative flex min-h-[260px] cursor-pointer items-end overflow-hidden rounded-2xl border border-faint transition-transform duration-300 hover:-translate-y-1.5"
           >
             {ev.image ? (
               <Image
@@ -98,22 +98,21 @@ export default function FeaturedWork() {
             ) : (
               <div className={`absolute inset-0 transition-transform duration-[600ms] group-hover:scale-[1.07] ${ev.media}`} />
             )}
-            <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,255,255,0.05)_0_2px,transparent_2px_8px)]" />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(8,8,10,0.98)_10%,transparent_75%)]" />
-            <span className="absolute right-[14px] top-3 font-mono text-[9px] text-white/30">
-              {ev.placeholder}
-            </span>
-
-            <div className="relative z-[2] w-full p-[26px]">
+            {ev.image && (
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(0deg,rgba(18,32,64,0.88)_0%,rgba(18,32,64,0.35)_55%,transparent_85%)]" />
+            )}
+            <div className={`relative z-[2] w-full p-[26px] ${ev.image ? '' : 'bg-white/85 backdrop-blur-sm'}`}>
               <span
                 className={`mb-[14px] inline-block rounded-[4px] px-[11px] py-[5px] text-[10px] font-semibold tracking-[1px] ${
-                  ev.badgeGlass ? 'bg-white/[0.16] text-white backdrop-blur-sm' : 'bg-red-600 text-white'
+                  ev.image
+                    ? 'bg-white/[0.16] text-white backdrop-blur-sm'
+                    : 'bg-red text-white'
                 }`}
               >
                 {ev.badge}
               </span>
-              <h3 className="mb-2.5 font-serif text-[21px] font-bold text-white">{ev.title}</h3>
-              <div className="mb-3 flex flex-wrap gap-[18px] text-[12.5px] text-[#c3c4ca]">
+              <h3 className={`mb-2.5 font-serif text-[21px] font-bold ${ev.image ? 'text-white' : 'text-ink'}`}>{ev.title}</h3>
+              <div className={`mb-3 flex flex-wrap gap-[18px] text-[12.5px] ${ev.image ? 'text-white/80' : 'text-muted'}`}>
                 {ev.meta.map((m) => (
                   <span key={m.text} className="inline-flex items-center gap-1.5">
                     <MetaIcon name={m.icon} />
@@ -121,7 +120,7 @@ export default function FeaturedWork() {
                   </span>
                 ))}
               </div>
-              <p className="line-clamp-3 text-[12px] leading-relaxed text-white/70">
+              <p className={`line-clamp-3 text-[12px] leading-relaxed ${ev.image ? 'text-white/70' : 'text-muted'}`}>
                 {ev.description}
               </p>
             </div>

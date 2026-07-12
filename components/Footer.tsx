@@ -5,8 +5,8 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import translations from '@/lib/translations';
 
 const socialBox =
-  'flex h-[38px] w-[38px] items-center justify-center rounded-[7px] bg-white/[0.06] text-[#c3c4ca] transition-colors hover:bg-red hover:text-white';
-const flink = 'text-[13.5px] text-muted no-underline transition-colors hover:text-red-soft';
+  'flex h-[38px] w-[38px] items-center justify-center rounded-[7px] border border-faint bg-white text-muted transition-colors hover:bg-red hover:text-white hover:border-red';
+const flink = 'text-[13.5px] text-muted no-underline transition-colors hover:text-red';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -21,19 +21,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer id="contact" className="border-t border-white/5 bg-bg-soft px-[6%] pb-[30px] pt-16">
+    <footer id="contact" className="border-t border-faint bg-bg-soft px-[6%] pb-[30px] pt-16">
       <div className="grid grid-cols-[1.8fr_1fr_1fr] gap-[50px] pb-12 max-[760px]:grid-cols-1 max-[760px]:gap-9">
         <div>
-          <div className="mb-[18px] font-serif text-[20px] font-extrabold text-red-soft">
+          <div className="mb-[18px] font-serif text-[20px] font-extrabold text-red">
             Parbat-NY
           </div>
-          <p className="max-w-[330px] text-[13.5px] leading-[1.7] text-[#8a8b92]">
+          <p className="max-w-[330px] text-[13.5px] leading-[1.7] text-muted">
             {t.description}
           </p>
         </div>
 
         <div>
-          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-white">{t.navHeading}</h4>
+          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-ink">{t.navHeading}</h4>
           <nav className="flex flex-col gap-3">
             {navItems.map((i) => (
               <Link key={i.href} href={i.href} className={flink}>
@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-white">{t.connectHeading}</h4>
+          <h4 className="mb-5 text-xs font-semibold tracking-[2px] text-ink">{t.connectHeading}</h4>
           <div className="flex gap-3">
             <a href="/contact" aria-label="Website" className={socialBox}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -67,10 +67,10 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] pt-[26px]">
-        <span className="text-[12.5px] text-faint">{t.copyright(year)}</span>
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-faint pt-[26px]">
+        <span className="text-[12.5px] text-muted-2">{t.copyright(year)}</span>
         <div className="flex gap-7">
-          <Link href="/privacy" className="text-[12.5px] text-[#8a8b92] no-underline transition-colors hover:text-red-soft">
+          <Link href="/privacy" className="text-[12.5px] text-muted no-underline transition-colors hover:text-red">
             {t.legal.privacy}
           </Link>
         </div>

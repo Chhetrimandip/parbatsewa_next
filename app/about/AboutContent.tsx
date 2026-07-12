@@ -93,8 +93,8 @@ function PillarIcon({ name }: { name: string }) {
   );
 }
 
-const eyebrow = 'block text-xs font-semibold tracking-[3px] text-red-soft';
-const sectionTitle = 'font-serif text-[30px] font-bold';
+const eyebrow = 'block text-xs font-semibold tracking-[3px] text-red';
+const sectionTitle = 'font-serif text-[30px] font-bold text-ink';
 const muted = 'text-[15px] leading-[1.8] text-muted';
 
 export default function AboutContent() {
@@ -120,8 +120,7 @@ export default function AboutContent() {
             <p className={muted}>{t.story.p1}</p>
             <p className={`${muted} mt-4`}>{t.story.p2}</p>
           </Reveal>
-          <Reveal className="relative min-h-[340px] overflow-hidden rounded-xl bg-[radial-gradient(100%_100%_at_30%_20%,#5a3520_0%,#2a1810_55%,#150c08_100%)]">
-            <div className="absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,200,110,0.06)_0_2px,transparent_2px_8px)]" />
+          <Reveal className="relative min-h-[340px] overflow-hidden rounded-2xl border border-faint bg-bg-soft">
             <Image
               src="/community.jpeg"
               alt={'Community photo'}
@@ -135,8 +134,8 @@ export default function AboutContent() {
         <section className="px-[6%] pb-[90px]">
           <Reveal className="grid grid-cols-4 gap-6 max-[980px]:grid-cols-2 max-[560px]:grid-cols-1">
             {t.stats.map((s) => (
-              <div key={s.label} className="rounded-[10px] border border-white/5 bg-card p-[30px]">
-                <div className="mb-1.5 font-serif text-[40px] font-extrabold text-red-soft">{s.value}</div>
+              <div key={s.label} className="rounded-2xl border border-faint bg-card p-[30px] shadow-sm">
+                <div className="mb-1.5 font-serif text-[40px] font-bold text-red">{s.value}</div>
                 <div className="text-[13px] tracking-[0.5px] text-muted">{s.label}</div>
               </div>
             ))}
@@ -154,12 +153,12 @@ export default function AboutContent() {
               <Reveal
                 key={p.title}
                 as="article"
-                className={`min-h-[230px] rounded-[10px] border border-white/5 p-[30px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_44px_rgba(0,0,0,0.42)] ${p.icon === 'music' || p.icon === 'drop' ? 'bg-card' : 'bg-card-2'}`}
+                className={`min-h-[230px] rounded-2xl border border-faint p-[30px] shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md ${p.icon === 'music' || p.icon === 'drop' ? 'bg-card' : 'bg-card-2'}`}
               >
-                <span className="mb-[38px] block text-red-soft">
+                <span className="mb-[38px] block text-red">
                   <PillarIcon name={p.icon} />
                 </span>
-                <h3 className="mb-3 font-serif text-[18px] font-bold">{p.title}</h3>
+                <h3 className="mb-3 font-serif text-[18px] font-bold text-ink">{p.title}</h3>
                 <p className="text-[13px] leading-[1.7] text-muted-2">{p.body}</p>
               </Reveal>
             ))}

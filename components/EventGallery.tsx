@@ -45,8 +45,8 @@ export default function EventGallery({ images }: EventGalleryProps) {
 
   if (validImages.length === 0) {
     return (
-      <div className="flex h-[420px] items-center justify-center bg-[radial-gradient(circle_at_top_left,rgba(255,110,125,0.16),transparent_55%),radial-gradient(circle_at_bottom_right,rgba(197,111,255,0.16),transparent_40%)] rounded-[18px]">
-        <span className="text-sm uppercase tracking-[2px] text-white/40">No event image available</span>
+      <div className="flex h-[420px] items-center justify-center bg-bg-soft rounded-2xl">
+        <span className="text-sm uppercase tracking-[2px] text-muted-2">No event image available</span>
       </div>
     );
   }
@@ -54,14 +54,14 @@ export default function EventGallery({ images }: EventGalleryProps) {
   return (
     <>
       {/* Thumbnail Grid */}
-      <div className="rounded-[18px] border border-white/5 bg-[#15151a] p-6">
-        <p className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-red-soft">Event gallery</p>
+      <div className="rounded-2xl border border-faint bg-white p-6 shadow-sm">
+        <p className="mb-5 text-xs font-semibold uppercase tracking-[3px] text-red">Event gallery</p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {validImages.map((src, index) => (
             <button
               key={index}
               onClick={() => setLightboxIndex(index)}
-              className="group relative h-[130px] overflow-hidden rounded-[12px] bg-[#0d0d10] border border-white/5 hover:border-white/25 transition-all duration-200 focus:outline-none"
+              className="group relative h-[130px] overflow-hidden rounded-xl bg-bg-soft border border-faint hover:border-blue/40 transition-all duration-200 focus:outline-none"
             >
               <Image
                 src={src}

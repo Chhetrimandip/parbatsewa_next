@@ -118,7 +118,7 @@ export default async function EventPage({ params }: EventPageProps) {
 
           {/* Details & Summaries Section below the gallery */}
           <Reveal className="grid grid-cols-[1.1fr_0.9fr] gap-10 max-[980px]:grid-cols-1">
-            <div className="rounded-[18px] border border-white/5 bg-[#121216] p-7 shadow-[0_24px_80px_rgba(0,0,0,0.35)] space-y-6">
+            <div className="rounded-2xl border border-faint bg-white p-7 shadow-sm space-y-6">
               <div className="flex flex-wrap items-center gap-3">
                 {event.badge && (
                   <span className="rounded-full bg-red px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
@@ -128,33 +128,33 @@ export default async function EventPage({ params }: EventPageProps) {
               </div>
 
               <div>
-                <h2 className="mb-4 font-serif text-[30px] font-bold leading-[1.1]">About this event</h2>
-                <p className="text-[15px] leading-[1.8] text-[#d2d3d9]">
+                <h2 className="mb-4 font-serif text-[30px] font-bold leading-[1.1] text-ink">About this event</h2>
+                <p className="text-[15px] leading-[1.8] text-muted">
                   {event.description ?? 'No description is available for this event.'}
                 </p>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
                 {eventDetails.map((detail) => (
-                  <div key={detail.label} className="rounded-[14px] border border-white/10 bg-[#131318] p-5">
-                    <p className="mb-2 text-[11px] uppercase tracking-[2px] text-red-soft">{detail.label}</p>
-                    <p className="text-base font-semibold text-white">{detail.value}</p>
+                  <div key={detail.label} className="rounded-xl border border-faint bg-bg-soft p-5">
+                    <p className="mb-2 text-[11px] uppercase tracking-[2px] text-red">{detail.label}</p>
+                    <p className="text-base font-semibold text-ink">{detail.value}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-[18px] border border-white/5 bg-[#15151a] p-7 self-start">
-              <p className="mb-6 text-xs font-semibold uppercase tracking-[3px] text-red-soft">Event summary</p>
+            <div className="rounded-2xl border border-faint bg-white p-7 shadow-sm self-start">
+              <p className="mb-6 text-xs font-semibold uppercase tracking-[3px] text-red">Event summary</p>
               <div className="space-y-5">
-                <div className="rounded-[14px] bg-[#0f1014] p-5">
-                  <p className="mb-2 text-[11px] uppercase tracking-[2px] text-red-soft">Location</p>
-                  <p className="text-base font-semibold text-white">{event.location ?? 'TBD'}</p>
+                <div className="rounded-xl bg-bg-soft p-5">
+                  <p className="mb-2 text-[11px] uppercase tracking-[2px] text-red">Location</p>
+                  <p className="text-base font-semibold text-ink">{event.location ?? 'TBD'}</p>
                 </div>
-                <div className="rounded-[14px] bg-[#0f1014] p-5">
-                  <p className="mb-2 text-[11px] uppercase tracking-[2px] text-red-soft">When</p>
-                  <p className="text-base font-semibold text-white">{event.timeframe ?? 'TBD'}</p>
-                  {event.date && <p className="mt-1 text-sm text-[#c3c4ca]">{formatDate(event.date)}</p>}
+                <div className="rounded-xl bg-bg-soft p-5">
+                  <p className="mb-2 text-[11px] uppercase tracking-[2px] text-red">When</p>
+                  <p className="text-base font-semibold text-ink">{event.timeframe ?? 'TBD'}</p>
+                  {event.date && <p className="mt-1 text-sm text-muted">{formatDate(event.date)}</p>}
                 </div>
               </div>
             </div>

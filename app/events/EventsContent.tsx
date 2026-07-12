@@ -68,21 +68,19 @@ export default function EventsContent({ mainEvents, partnerFlyers, featured, upc
                   priority
                 />
               ) : (
-                <div className="absolute inset-0 bg-[radial-gradient(100%_120%_at_75%_20%,#7a3a44_0%,#3a1820_50%,#16080c_100%)]" />
+                <div className="absolute inset-0 bg-bg-soft" />
               )}
-              <div className="absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,160,170,0.06)_0_2px,transparent_2px_8px)]" />
-              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,6,8,0.92)_0%,rgba(8,6,8,0.5)_55%,transparent_100%)]" />
-              <div className="relative z-[2] max-w-[560px] p-11">
+              <div className="relative z-[2] m-6 max-w-[560px] rounded-xl bg-white/85 p-8 backdrop-blur-sm">
                 <span className="mb-[18px] inline-block rounded-[4px] bg-red px-[13px] py-1.5 text-[10px] font-semibold tracking-[1.5px] text-white">
                   NEXT UP
                 </span>
-                <h2 className="mb-[14px] font-serif text-[32px] font-bold leading-[1.15] max-[560px]:text-[26px]">
+                <h2 className="mb-[14px] font-serif text-[32px] font-bold leading-[1.15] text-ink max-[560px]:text-[26px]">
                   {featured.title}
                 </h2>
                 {featured.description && (
-                  <p className="mb-[22px] text-[15px] leading-[1.7] text-[#d2d3d9]">{featured.description}</p>
+                  <p className="mb-[22px] text-[15px] leading-[1.7] text-muted">{featured.description}</p>
                 )}
-                <div className="flex flex-wrap gap-6 text-[13px] text-[#e7e8ee]">
+                <div className="flex flex-wrap gap-6 text-[13px] text-muted">
                   {featured.dateLabel && (
                     <span className="inline-flex items-center gap-[7px]">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -111,7 +109,7 @@ export default function EventsContent({ mainEvents, partnerFlyers, featured, upc
         {upcomingEvents.length > 0 && (
           <section className="px-[6%] pb-14">
             <Reveal className="mb-7">
-              <p className="mb-[10px] block text-xs font-semibold tracking-[3px] text-red-soft">
+              <p className="mb-[10px] block text-xs font-semibold tracking-[3px] text-red">
                 {lang === 'en' ? 'COMING UP' : 'आउँदो'}
               </p>
               <h2 className="font-serif text-[26px] font-bold">
@@ -122,9 +120,9 @@ export default function EventsContent({ mainEvents, partnerFlyers, featured, upc
               {upcomingEvents.map((e) => (
                 <Reveal
                   key={e._id}
-                  className="flex items-center gap-5 rounded-[10px] border border-white/[0.07] bg-card px-6 py-5"
+                  className="flex items-center gap-5 rounded-[10px] border border-faint bg-card px-6 py-5"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red/10 text-red-soft">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red/10 text-red">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M3 10h18M8 2v4M16 2v4" />
                     </svg>
@@ -137,7 +135,7 @@ export default function EventsContent({ mainEvents, partnerFlyers, featured, upc
                       </p>
                     )}
                   </div>
-                  <span className="shrink-0 rounded-[4px] bg-red/80 px-2.5 py-1 text-[9px] font-semibold tracking-[1px] text-white">
+                  <span className="shrink-0 rounded-[4px] bg-red px-2.5 py-1 text-[9px] font-semibold tracking-[1px] text-white">
                     {lang === 'en' ? 'COMING SOON' : 'छिट्टै आउँदैछ'}
                   </span>
                 </Reveal>
@@ -149,7 +147,7 @@ export default function EventsContent({ mainEvents, partnerFlyers, featured, upc
         {/* HIGHLIGHTS GRID */}
         <section className="px-[6%] pb-16">
           <Reveal className="mb-9">
-            <p className="mb-[14px] block text-xs font-semibold tracking-[3px] text-red-soft">HIGHLIGHTS</p>
+            <p className="mb-[14px] block text-xs font-semibold tracking-[3px] text-red">HIGHLIGHTS</p>
             <h2 className="font-serif text-[30px] font-bold">{t.highlightsHeading}</h2>
           </Reveal>
           <div className="grid grid-cols-3 gap-6 max-[860px]:grid-cols-2 max-[560px]:grid-cols-1">
@@ -167,9 +165,9 @@ export default function EventsContent({ mainEvents, partnerFlyers, featured, upc
 
         {/* PARTNER FLYERS */}
         {partnerFlyers.length > 0 && (
-          <section className="px-[6%] pb-20 border-t border-white/5 pt-16 bg-[#0a0a0d]/40">
+          <section className="px-[6%] pb-20 border-t border-faint pt-16 bg-bg-soft">
             <Reveal className="mb-9">
-              <p className="mb-[14px] block text-xs font-semibold tracking-[3px] text-amber-400">COLLABORATIONS</p>
+              <p className="mb-[14px] block text-xs font-semibold tracking-[3px] text-red">COLLABORATIONS</p>
               <h2 className="font-serif text-[30px] font-bold">{t.partnerHeading}</h2>
             </Reveal>
             <div className="grid grid-cols-4 gap-6 max-[1024px]:grid-cols-3 max-[768px]:grid-cols-2 max-[480px]:grid-cols-1">

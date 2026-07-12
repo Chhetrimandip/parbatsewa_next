@@ -199,7 +199,7 @@ export default function PrivacyPage() {
           <div className="flex flex-col gap-10">
             {t.sections.map((section) => (
               <Reveal key={section.heading}>
-                <h2 className="mb-4 font-serif text-[24px] font-bold leading-[1.25] text-white max-[640px]:text-[21px]">
+                <h2 className="mb-4 font-serif text-[24px] font-bold leading-[1.25] text-ink max-[640px]:text-[21px]">
                   {section.heading}
                 </h2>
                 <div className="flex flex-col gap-4">

@@ -1,19 +1,20 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Work_Sans } from 'next/font/google';
+import { Playfair_Display, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from '@/lib/site';
 
 const serif = Playfair_Display({
   subsets: ['latin'],
-  weight: ['500', '600', '700', '800', '900'],
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
   variable: '--font-serif',
   display: 'swap',
 });
 
-const sans = Work_Sans({
+const sans = Source_Sans_3({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600'],
   variable: '--font-sans',
   display: 'swap',
 });

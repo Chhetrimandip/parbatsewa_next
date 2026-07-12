@@ -9,14 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#0d0d0f',
-        'bg-soft': '#08080a',
-        card: '#353b49',
-        'card-2': '#3a4150',
-        ink: '#f4f4f5',
-        muted: { DEFAULT: '#9a9ba3', 2: '#aeb0b8' },
-        faint: '#65666d',
-        red: { DEFAULT: '#e11d3a', dark: '#c4172f', soft: '#e8475f' },
+        bg: '#F6FAFF',
+        'bg-soft': '#EBF2FC',
+        card: '#FFFFFF',
+        'card-2': '#EDF4FB',
+        ink: '#122040',
+        muted: { DEFAULT: '#365070', 2: '#5A7499' },
+        faint: '#C8D9EF',
+        red: { DEFAULT: '#1B5FAA', dark: '#134A8A', soft: '#D0E4F7' },
+        blue: { DEFAULT: '#1B5FAA', soft: '#EEF3FC', border: '#C8D9F0' },
       },
       fontFamily: {
         serif: ['var(--font-serif)', 'Georgia', 'serif'],

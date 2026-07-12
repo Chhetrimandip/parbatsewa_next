@@ -20,10 +20,9 @@ export default function CTABand({
 }: CTABandProps) {
   return (
     <section className="px-[6%] pb-[90px]">
-      <Reveal className="relative overflow-hidden rounded-[14px] bg-red px-10 py-16 text-center">
-        <div className="absolute inset-0 bg-[radial-gradient(60%_120%_at_50%_-10%,rgba(255,255,255,0.16),transparent_60%)]" />
+      <Reveal className="relative overflow-hidden rounded-2xl bg-ink px-10 py-16 text-center">
         <div className="relative z-[2]">
-          <p className="mb-[18px] font-serif text-[15px] font-medium italic tracking-[1px] text-[#ffd9df]">
+          <p className="mb-[18px] font-serif text-[15px] font-medium italic tracking-[1px] text-red">
             {kicker}
           </p>
           <p className="mx-auto mb-[34px] max-w-[540px] text-[22px] font-medium leading-[1.5] text-white">
@@ -32,14 +31,14 @@ export default function CTABand({
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               href={primaryHref}
-              className="rounded-md bg-[#fdf5f6] px-8 py-[15px] text-[13px] font-semibold tracking-[1px] text-red no-underline transition-all hover:-translate-y-0.5 hover:bg-white"
+              className="rounded-lg bg-blue px-8 py-[15px] text-[13px] font-semibold tracking-[1px] text-white no-underline transition-all hover:-translate-y-0.5 hover:bg-blue/90"
             >
               {primaryLabel}
             </Link>
             {secondaryLabel && (
               <Link
                 href={secondaryHref}
-                className="rounded-md border border-white/60 px-8 py-[15px] text-[13px] font-semibold tracking-[1px] text-white no-underline transition-colors hover:bg-white/[0.14]"
+                className="rounded-lg border-[1.5px] border-white/60 px-8 py-[15px] text-[13px] font-semibold tracking-[1px] text-white no-underline transition-colors hover:bg-white/[0.14]"
               >
                 {secondaryLabel}
               </Link>

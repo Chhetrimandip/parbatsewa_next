@@ -15,7 +15,7 @@ export default function TeamMember({ name, role, photo }: TeamMemberProps) {
     .slice(0, 2);
 
   return (
-    <Reveal className="rounded-[10px] border border-white/5 bg-card p-[26px] text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_44px_rgba(0,0,0,0.42)]">
+    <Reveal className="rounded-2xl border border-faint bg-card p-[26px] text-center shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md">
       <div className="relative mx-auto mb-[14px] h-[88px] w-[88px] overflow-hidden rounded-full">
         {photo ? (
           <Image
@@ -26,14 +26,13 @@ export default function TeamMember({ name, role, photo }: TeamMemberProps) {
             sizes="88px"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(100%_100%_at_30%_20%,#5a3520,#2a1810)]">
-            <div className="absolute inset-0 bg-[repeating-linear-gradient(125deg,rgba(255,200,110,0.07)_0_2px,transparent_2px_8px)]" />
-            <span className="font-serif text-[26px] font-bold text-white/50">{initials}</span>
+          <div className="flex h-full w-full items-center justify-center bg-bg-soft">
+            <span className="font-serif text-[26px] font-bold text-red">{initials}</span>
           </div>
         )}
       </div>
-      <h3 className="mb-[5px] font-serif text-[17px] font-bold">{name}</h3>
-      <p className="text-[11px] font-semibold uppercase tracking-[1px] text-red-soft">{role}</p>
+      <h3 className="mb-[5px] font-serif text-[17px] font-bold text-ink">{name}</h3>
+      <p className="text-[11px] font-semibold uppercase tracking-[1px] text-red">{role}</p>
     </Reveal>
   );
 }

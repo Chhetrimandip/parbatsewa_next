@@ -11,10 +11,10 @@ import translations from '@/lib/translations';
 // Replace this with your actual Google Form URL once created
 const MEMBERSHIP_FORM_URL = 'https://forms.gle/MEBeWYXc9q6p45xW6';
 
-const eyebrow = 'block text-xs font-semibold tracking-[3px] text-red-soft';
-const sectionTitle = 'font-serif text-[30px] font-bold';
+const eyebrow = 'block text-xs font-semibold tracking-[3px] text-red';
+const sectionTitle = 'font-serif text-[30px] font-bold text-ink';
 const muted = 'text-[15px] leading-[1.8] text-muted';
-const inputClass = 'w-full rounded-[8px] border border-white/10 bg-card p-4 text-[15px] text-white placeholder:text-muted focus:border-red-soft focus:outline-none focus:ring-1 focus:ring-red-soft transition-colors';
+const inputClass = 'w-full rounded-lg border border-faint bg-white p-4 text-[15px] text-ink placeholder:text-muted-2 focus:border-blue focus:outline-none focus:ring-1 focus:ring-blue transition-colors';
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -69,7 +69,7 @@ export default function ContactPage() {
         <section className="mx-auto grid max-w-[1200px] grid-cols-[1fr_1fr] items-start gap-16 px-[6%] pb-[120px] pt-10 max-[980px]:grid-cols-1 max-[980px]:gap-12">
 
           {/* LEFT COLUMN: FORM */}
-          <Reveal className="rounded-[10px] border border-white/5 bg-card-2 p-[40px] max-[560px]:p-[24px]">
+          <Reveal className="rounded-2xl border border-faint bg-card-2 p-[40px] shadow-sm max-[560px]:p-[24px]">
             <p className={`${eyebrow} mb-4`}>{t.form.eyebrow}</p>
             <h2 className={`${sectionTitle} mb-6 leading-[1.2]`}>
               {isMembership ? t.form.headingMembership : t.form.headingInquiry}
@@ -77,17 +77,17 @@ export default function ContactPage() {
 
             {/* Option selector — always visible */}
             <div className="mb-5">
-              <label className="mb-3 block text-[14px] font-medium text-white">{t.form.helpLabel}</label>
+              <label className="mb-3 block text-[14px] font-medium text-ink">{t.form.helpLabel}</label>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {t.form.options.map((option, idx) => (
                   <div key={option} className="contents">
                     <button
                       type="button"
                       onClick={() => setInquiryIndex(idx)}
-                      className={`rounded-[8px] border p-3 text-left text-[14px] transition-all ${
+                      className={`rounded-lg border p-3 text-left text-[14px] transition-all ${
                         inquiryIndex === idx
-                          ? 'border-red-soft bg-red-soft/10 text-white font-semibold'
-                          : 'border-white/10 bg-card text-muted hover:border-white/30'
+                          ? 'border-blue bg-blue-soft text-ink font-semibold'
+                          : 'border-faint bg-white text-muted hover:border-blue/40'
                       }`}
                     >
                       {option}
@@ -98,7 +98,7 @@ export default function ContactPage() {
                         onClick={() =>
                           document.getElementById('whatsapp-contacts')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                         }
-                        className="flex items-center justify-between gap-2 rounded-[8px] border border-red-soft/40 bg-red-soft/5 p-3 text-left text-[14px] font-semibold text-red-soft transition-colors hover:bg-red-soft/10"
+                        className="flex items-center justify-between gap-2 rounded-lg border border-red/40 bg-red/5 p-3 text-left text-[14px] font-semibold text-red transition-colors hover:bg-red/10"
                       >
                         {lang === 'en' ? 'Sign up for dollar a Day — Support Us' : 'डलर अ डे — सहयोग गर्नुहोस्'}
                         <svg className="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -115,8 +115,8 @@ export default function ContactPage() {
             {isMembership ? (
               /* Membership → Google Form redirect */
               <div className="flex flex-col gap-5">
-                <div className="rounded-[8px] border border-white/10 bg-card p-5 space-y-3">
-                  <p className="text-[14px] leading-[1.7] text-muted-2">
+                <div className="rounded-lg border border-faint bg-white p-5 space-y-3">
+                  <p className="text-[14px] leading-[1.7] text-muted">
                     {lang === 'en'
                       ? 'Your membership application is handled through Google Forms. You\'ll be able to upload your documents and payment screenshot there securely.'
                       : 'तपाईंको सदस्यता आवेदन Google Forms मार्फत प्रक्रिया गरिन्छ। त्यहाँ तपाईंका कागजातहरू र भुक्तानी स्क्रिनसट सुरक्षित रूपमा अपलोड गर्न सक्नुहुनेछ।'}
@@ -126,8 +126,8 @@ export default function ContactPage() {
                       ? ['Full name, email & phone number', 'State ID photo', 'Citizenship photo (Nepal or US)', 'Payment screenshot']
                       : ['पूरा नाम, इमेल र फोन नम्बर', 'राज्य परिचयपत्र फोटो', 'नागरिकता फोटो (नेपाल वा अमेरिका)', 'भुक्तानी स्क्रिनसट']
                     ).map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-[13px] text-muted-2">
-                        <svg className="shrink-0 text-red-soft" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <li key={item} className="flex items-center gap-2 text-[13px] text-muted">
+                        <svg className="shrink-0 text-red" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
                         {item}
@@ -140,7 +140,7 @@ export default function ContactPage() {
                   href={MEMBERSHIP_FORM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 rounded-[8px] bg-red-soft py-4 font-semibold text-white transition-opacity hover:opacity-90"
+                  className="flex items-center justify-center gap-3 rounded-lg bg-blue py-4 font-semibold text-white transition-opacity hover:opacity-90"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -187,7 +187,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-2 w-full rounded-[8px] bg-red-soft py-4 font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="mt-2 w-full rounded-lg bg-blue py-4 font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {isSubmitting ? t.form.sending : t.form.submitInquiry}
                 </button>
@@ -195,10 +195,10 @@ export default function ContactPage() {
                 <p className="text-center text-[12px] leading-[1.6] text-muted">
                   {lang === 'en' ? (
                     <>By submitting, you agree to our{' '}
-                      <a href="/privacy" className="text-red-soft underline hover:opacity-80">Privacy Policy</a>.</>
+                      <a href="/privacy" className="text-red underline hover:opacity-80">Privacy Policy</a>.</>
                   ) : (
                     <>पेश गरेर, तपाईं हाम्रो{' '}
-                      <a href="/privacy" className="text-red-soft underline hover:opacity-80">गोपनीयता नीति</a>मा सहमत हुनुहुन्छ।</>
+                      <a href="/privacy" className="text-red underline hover:opacity-80">गोपनीयता नीति</a>मा सहमत हुनुहुन्छ।</>
                   )}
                 </p>
 
@@ -218,27 +218,27 @@ export default function ContactPage() {
             <h2 className={`${sectionTitle} mb-5 leading-[1.2]`}>{t.membership.heading}</h2>
             <p className={`${muted} mb-8`}>{t.membership.lead}</p>
 
-            <div className="mb-6 rounded-[10px] border border-white/5 bg-card p-[30px]">
-              <h3 className="mb-4 font-serif text-[20px] font-bold text-white">{t.membership.feesHeading}</h3>
+            <div className="mb-6 rounded-2xl border border-faint bg-card p-[30px] shadow-sm">
+              <h3 className="mb-4 font-serif text-[20px] font-bold text-ink">{t.membership.feesHeading}</h3>
               <ul className="flex flex-col gap-3">
                 {t.membership.fees.map((fee, i) => (
-                  <li key={i} className={`flex items-center justify-between ${i < t.membership.fees.length - 1 ? 'border-b border-white/5 pb-2' : ''}`}>
-                    <span className="text-[15px] text-muted-2">{fee.label}</span>
-                    <span className="font-bold text-white">{fee.price}</span>
+                  <li key={i} className={`flex items-center justify-between ${i < t.membership.fees.length - 1 ? 'border-b border-faint pb-2' : ''}`}>
+                    <span className="text-[15px] text-muted">{fee.label}</span>
+                    <span className="font-bold text-ink">{fee.price}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="mb-8 rounded-[10px] border border-white/5 bg-card p-[30px]">
-              <h3 className="mb-4 font-serif text-[20px] font-bold text-white">{t.membership.reqHeading}</h3>
+            <div className="mb-8 rounded-2xl border border-faint bg-card p-[30px] shadow-sm">
+              <h3 className="mb-4 font-serif text-[20px] font-bold text-ink">{t.membership.reqHeading}</h3>
               <ul className="flex flex-col gap-3">
                 {t.membership.requirements.map((req, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <svg className="mt-1 min-w-[16px] text-red-soft" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <svg className="mt-1 min-w-[16px] text-red" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span className="text-[14px] leading-[1.6] text-muted-2">{req}</span>
+                    <span className="text-[14px] leading-[1.6] text-muted">{req}</span>
                   </li>
                 ))}
               </ul>
